@@ -1,7 +1,7 @@
-apiary_callback(
-	{
-			"apiaries":[
-			{
+(function() {
+    
+  var arr = [
+      {
 				"type":"Apiary",
 				"geometry":{"type":"Point","coordinates":[33.165388,-87.739671]},
 				"fieldName":"Long North",
@@ -74,5 +74,9 @@ apiary_callback(
 				"fieldName":"Home Garden",
 				"owner":"Jim Barry"
 			}
-		]
-	});
+		];
+		
+	window.map_callback(arr);
+	window.list_callback(arr);
+
+})();
