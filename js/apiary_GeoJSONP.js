@@ -76,7 +76,7 @@
 			}
 			];
 
-	window.map_callback(arr);
+	//window.map_callback(arr);
 	window.list_callback(arr);
 
 })();
