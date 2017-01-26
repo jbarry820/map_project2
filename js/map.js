@@ -11,10 +11,10 @@ function initMap() {
 	});
 
 	//var markers = [];
-	//var markers = ko.observableArray([]);
-	//var apiaryListInMap = ko.observableArray([]);
-	// Loop through the results array and place a marker for each
-	// set of coordinates.
+	var markers = ko.observableArray([]);
+	var apiaryListInMap = ko.observableArray([]);
+
+	// Loop through the results array and place a marker for each  set of coordinates.
 	//window.map_callback = function(arr) {
 	//  for (var i = 0; i < arr.length; i++) {
 	//  	var coords = arr[i].geometry.coordinates;

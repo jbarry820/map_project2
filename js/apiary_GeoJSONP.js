@@ -34,7 +34,7 @@
 			},
 			{
 				"type":"Apiary",
-				"geometry":{"type":"Point","coordinates":[33.198101-87.772925]},
+				"geometry":{"type":"Point","coordinates":[33.198101,-87.772925]},
 				"fieldName":"Jimmy Gilliam",
 				"owner":"Jim Barry"
 			},
@@ -59,7 +59,7 @@
 			{
 				"type":"Apiary",
 				"geometry":{"type":"Point","coordinates":[33.051425,-87.715746]},
-				"fieldName":"Home SfieldNamee",
+				"fieldName":"Home Side Field",
 				"owner":"Jim Barry"
 			},
 			{
@@ -70,7 +70,7 @@
 			},
 			{
 				"type":"Apiary",
-				"geometry":{"type":"Point","coordinates":[33.050978-87.716837]},
+				"geometry":{"type":"Point","coordinates":[33.050978,-87.716837]},
 				"fieldName":"Home Garden",
 				"owner":"Jim Barry"
 			}
