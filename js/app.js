@@ -18,5 +18,8 @@ function list_callback(arr) {
   ko.applyBindings(new ApiaryList(arr));
 }
 
+document.getElementById('show-apiaries').addEventListener('click', showApiaries);
+document.getElementById('hide-apiaries').addEventListener('click', hideApiaries);
+
 // Kick off the init function
 init();
