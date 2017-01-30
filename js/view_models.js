@@ -38,7 +38,9 @@ var ApiaryList = function(arr) {
 		  	zoom: 20,
 		  	mapTypeId: 'satellite'
 		});
+
 	    var apHomeLatLong = {lat:clickedApiary.latitude(),lng:clickedApiary.longitude()};
+
 		var apMarker = new google.maps.Marker({
 		  position: apHomeLatLong,
 		  map: map,
@@ -47,10 +49,10 @@ var ApiaryList = function(arr) {
 
 		var apiaryInfowindow = new google.maps.InfoWindow();
 		apMarker.addListener('click', function() {
-            populateInfoWindow(this, apiaryInfowindow);
+            populateApiaryWindow(this, apiaryInfowindow);
         });
 
-        function populateInfoWindow(marker, infowindow) {
+        function populateApiaryWindow(marker, infowindow) {
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
           infowindow.marker = marker;
@@ -65,15 +67,15 @@ var ApiaryList = function(arr) {
         }
       }
 
-		self.currentApiary(clickedApiary);
+	  self.currentApiary(clickedApiary);
 	};
 };
 
 function showApiaries() {
     var bounds = new google.maps.LatLngBounds();
     // Extend the boundaries of the map for each marker and display the marker
-    for (var i = 0; i < markers.length; i++) {
-      markers[i].setMap(map);
+    for (var i = 0; i < ApiaryList.length; i++) {
+      initMap.markers[i].setMap(map);
       bounds.extend(markers[i].position);
     }
     map.fitBounds(bounds);
@@ -81,7 +83,7 @@ function showApiaries() {
 
 // This function will loop through the listings and hide them all.
 function hideApiaries() {
-  for (var i = 0; i < markers.length; i++) {
+  for (var i = 0; i < ApiaryList.length; i++) {
     initMap.markers[i].setMap(null);
   }
 }
