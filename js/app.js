@@ -1,4 +1,4 @@
-
+var apiaryList;
 function init() {
 
   // Wait for the map to be ready
@@ -15,7 +15,8 @@ function init() {
 }
 
 function list_callback(arr) {
-  ko.applyBindings(new ApiaryList(arr));
+  apiaryList = new ApiaryList;
+  ko.applyBindings(apiaryList(arr));
 }
 
 document.getElementById('show-apiaries').addEventListener('click', showApiaries);
