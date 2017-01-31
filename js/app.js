@@ -15,8 +15,8 @@ function init() {
 }
 
 function list_callback(arr) {
-  apiaryList = new ApiaryList;
-  ko.applyBindings(apiaryList(arr));
+  //apiaryList = new ApiaryList;
+  ko.applyBindings(ApiaryList(arr));
 }
 
 document.getElementById('show-apiaries').addEventListener('click', showApiaries);

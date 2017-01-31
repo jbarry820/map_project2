@@ -17,12 +17,12 @@ var Apairy = function(data) {
 var ApiaryList = function(arr) {
 	var self = this;
 
-	this.apiaryList2 = ko.observableArray([]);
+	this.apiaryList = ko.observableArray([]);
 
 	arr.forEach(function(apiaryItem){
-		self.apiaryList2.push( new Apairy(apiaryItem) );
+		self.apiaryList.push( new Apairy(apiaryItem) );
 	});
-	this.currentApiary = ko.observable(this.apiaryList2()[0]);
+	this.currentApiary = ko.observable(this.apiaryList()[0]);
 
 	this.setApiary = function(clickedApiary) {
 		console.log("type      = " + clickedApiary.type());
@@ -74,7 +74,7 @@ var ApiaryList = function(arr) {
 function showApiaries() {
     var bounds = new google.maps.LatLngBounds();
     // Extend the boundaries of the map for each marker and display the marker
-    for (var i = 0; i < ApiaryList2.length; i++) {
+    for (var i = 0; i < ApiaryList.length; i++) {
       initMap.markers[i].setMap(map);
       bounds.extend(markers[i].position);
     }
@@ -83,7 +83,7 @@ function showApiaries() {
 
 // This function will loop through the listings and hide them all.
 function hideApiaries() {
-  for (var i = 0; i < ApiaryList2.length; i++) {
+  for (var i = 0; i < ApiaryList.length; i++) {
     initMap.markers[i].setMap(null);
   }
 }
