@@ -49,10 +49,10 @@ var ApiaryList = function(arr) {
 
 		var apiaryInfowindow = new google.maps.InfoWindow();
 		apMarker.addListener('click', function() {
-            populateApiaryWindow(this, apiaryInfowindow);
+            populateInfoWindow(this, apiaryInfowindow);
         });
 
-        function populateApiaryWindow(marker, infowindow) {
+        function populateInfoWindow(marker, infowindow) {
         // Check to make sure the infowindow is not already opened on this marker.
         if (infowindow.marker != marker) {
           infowindow.marker = marker;
