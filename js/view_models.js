@@ -14,15 +14,15 @@ var Apairy = function(data) {
 }
 
 // Receives array of apiary data
-var ApiaryList = function(arr) {
+ApiaryList = function(arr) {
 	var self = this;
 
-	this.apiaryList = ko.observableArray([]);
+	this.apiaryList2 = ko.observableArray([]);
 
 	arr.forEach(function(apiaryItem){
-		self.apiaryList.push( new Apairy(apiaryItem) );
+		self.apiaryList2.push( new Apairy(apiaryItem) );
 	});
-	this.currentApiary = ko.observable(this.apiaryList()[0]);
+	this.currentApiary = ko.observable(this.apiaryList2()[0]);
 
 	this.setApiary = function(clickedApiary) {
 		console.log("type      = " + clickedApiary.type());
