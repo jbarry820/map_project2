@@ -11,6 +11,7 @@ var Apairy = function(data) {
 	  position: new google.maps.LatLng(data.geometry.coordinates[0],data.geometry.coordinates[1]),
 	  map: map
 	});
+	markers().push(this.marker);
 }
 
 // Receives array of apiary data
@@ -23,6 +24,7 @@ var ApiaryList = function(arr) {
 		self.apiaryList.push( new Apairy(apiaryItem) );
 	});
 	this.currentApiary = ko.observable(this.apiaryList()[0]);
+	//console.log(this.apiaryList.length);
 
 	this.setApiary = function(clickedApiary) {
 		console.log("type      = " + clickedApiary.type());
@@ -74,8 +76,8 @@ var ApiaryList = function(arr) {
 function showApiaries() {
     var bounds = new google.maps.LatLngBounds();
     // Extend the boundaries of the map for each marker and display the marker
-    for (var i = 0; i < ApiaryList.length; i++) {
-      initMap.markers[i].setMap(map);
+    for (var i = 0; i < apiaryList.length; i++) {
+      markers()[i].setMap(map);
       bounds.extend(markers[i].position);
     }
     map.fitBounds(bounds);
@@ -84,6 +86,6 @@ function showApiaries() {
 // This function will loop through the listings and hide them all.
 function hideApiaries() {
   for (var i = 0; i < ApiaryList.length; i++) {
-    initMap.markers[i].setMap(null);
+    markers()[i].setMap(null);
   }
 }
