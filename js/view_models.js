@@ -76,16 +76,16 @@ var ApiaryList = function(arr) {
 function showApiaries() {
     var bounds = new google.maps.LatLngBounds();
     // Extend the boundaries of the map for each marker and display the marker
-    for (var i = 0; i < apiaryList.length; i++) {
+    for (var i = 0; i < apiaryList().length; i++) {
       markers()[i].setMap(map);
-      bounds.extend(markers[i].position);
+      bounds.extend(markers()[i].position);
     }
-    map.fitBounds(bounds);
+    //map.fitBounds(bounds);
  }
 
 // This function will loop through the listings and hide them all.
 function hideApiaries() {
-  for (var i = 0; i < ApiaryList.length; i++) {
+  for (var i = 0; i < apiaryList().length; i++) {
     markers()[i].setMap(null);
   }
 }
