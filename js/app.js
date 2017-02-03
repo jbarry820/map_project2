@@ -49,21 +49,22 @@ AppController.prototype = {
   
   showApiaries: function() 
   {
-    // Extend the boundaries of the map for each marker and display the marker
-    var bounds = new google.maps.LatLngBounds();    
-    for (var i = 0; i < this.aiaryList.apiaries.length; i++) {
-      this.markers[i].setMap(map);
-      bounds.extend(markers[i].position);
-    }
-    map.fitBounds(bounds);
+    var that = this;    
+    var bounds = new google.maps.LatLngBounds();
+    this.markers.forEach(function(m) {
+      m.setMap(that.map);
+      bounds.extend(m.position); 
+    });
+    that.map.fitBounds(bounds);
   },
   
   // This function will loop through the listings and hide them all.
   hideApiaries: function() 
   {
-    for (var i = 0; i < ApiaryList.length; i++) {
-      initMap.markers[i].setMap(null);
-    }
+    var that = this;
+    this.markers.forEach(function(m) { 
+      m.setMap(null); 
+    });    
   },
   
   apiaryClick: function(a)
