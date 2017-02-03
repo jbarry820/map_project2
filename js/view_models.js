@@ -43,8 +43,9 @@ var ApiaryList = function(arr) {
 	});
 	this.currentApiary = ko.observable(this.apiaries()[0]);
   
-	this.setApiary = function(a) 
-	{		            
+	this.apiaryClick = function(a) // a is the clicked apiary 
+	{
+	  a.marker.setMap(map);
     map.panTo(a.marker.getPosition());
     map.setZoom(20);
     map.setMapTypeId('satellite');
