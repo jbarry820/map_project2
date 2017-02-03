@@ -89,6 +89,6 @@
 			];
 
 	//window.map_callback(arr);
-	window.controller.listCallback(arr);
+	window.listCallback(arr);
 
 })();
