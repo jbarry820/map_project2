@@ -89,6 +89,7 @@
 			];
 
 	//window.map_callback(arr);
-	window.listCallback(arr);
+	//window.listCallback(arr);	
+	window.apiaryList.populate(arr);
 
 })();
