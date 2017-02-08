@@ -100,7 +100,8 @@ function hideApiaries() {
         var geocoder = new google.maps.Geocoder();
         // Get the address or place that the user entered.
         var address = document.getElementById('zoom-to-apiary-text').value;
-        console.log(ApiaryList.self.setApiary(address));
+        //console.log(ApiaryList.this.setApiary(address));
+        console.log(ApiaryList([0].this.fieldName()));
         // Make sure the address isn't blank.
         if (address == '') {
           window.alert('You must enter an area, or address.');
