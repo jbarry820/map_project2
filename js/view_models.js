@@ -59,7 +59,7 @@ var ApiaryList = function(arr) {
         console.log(fieldName);
         //console.log(ApiaryList([0].this.type()));
         // Make sure the address isn't blank.
-        if (fldName == '') {
+        if (fieldName == '') {
           window.alert('You must enter a valid apiary name.');
         } else {
           // Geocode the address/area entered to get the center. Then, center the map
