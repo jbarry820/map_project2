@@ -49,6 +49,36 @@ var ApiaryList = function(arr) {
 		  title: 'Finally'
 		});
 
+    //------------------
+    this.zoomToApiary = function(clickedApiary) {
+    //function zoomToApiary() {
+        // Initialize the geocoder.
+        var geocoder = new google.maps.Geocoder();
+        // Get the address or place that the user entered.
+        //var fldName = document.getElementById('zoom-to-apiary-text').value;
+        console.log(fieldName);
+        //console.log(ApiaryList([0].this.type()));
+        // Make sure the address isn't blank.
+        if (fldName == '') {
+          window.alert('You must enter a valid apiary name.');
+        } else {
+          // Geocode the address/area entered to get the center. Then, center the map
+          // on it and zoom in
+          geocoder.geocode(
+            { address: address,
+              //componentRestrictions: {locality: 'Alabama '}
+            }, function(results, status) {
+              if (status == google.maps.GeocoderStatus.OK) {
+                map.setCenter(results[0].geometry.location);
+                map.setZoom(15);
+              } else {
+                window.alert('That is not a valid apiary name.');
+              }
+            });
+        }
+      };
+    //------------------
+
 		var apiaryInfowindow = new google.maps.InfoWindow();
 		apMarker.addListener('click', function() {
             populateInfoWindow(this, apiaryInfowindow);
@@ -95,16 +125,16 @@ function hideApiaries() {
 // This function takes the input value in the find nearby area text input
       // locates it, and then zooms into that area. This is so that the user can
       // show all listings, then decide to focus on one area of the map.
-      function zoomToApiary() {
+      /*function zoomToApiary() {
         // Initialize the geocoder.
         var geocoder = new google.maps.Geocoder();
         // Get the address or place that the user entered.
-        var address = document.getElementById('zoom-to-apiary-text').value;
-        //console.log(ApiaryList.this.setApiary(address));
-        console.log(ApiaryList([0].this.fieldName()));
+        var fldName = document.getElementById('zoom-to-apiary-text').value;
+        console.log(fldName);
+        //console.log(ApiaryList([0].this.type()));
         // Make sure the address isn't blank.
-        if (address == '') {
-          window.alert('You must enter an area, or address.');
+        if (fldName == '') {
+          window.alert('You must enter a valid apiary name.');
         } else {
           // Geocode the address/area entered to get the center. Then, center the map
           // on it and zoom in
@@ -116,9 +146,8 @@ function hideApiaries() {
                 map.setCenter(results[0].geometry.location);
                 map.setZoom(15);
               } else {
-                window.alert('We could not find that location - try entering a more' +
-                    ' specific place.');
+                window.alert('That is not a valid apiary name.');
               }
             });
         }
-      }
+      }*/

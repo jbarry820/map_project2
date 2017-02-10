@@ -9,5 +9,5 @@ function initMap() {
 	});
 
 	markers = ko.observableArray([]);
-	var apiaryListInMap = ko.observableArray([]);
+	//var apiaryListInMap = ko.observableArray([]);
 }

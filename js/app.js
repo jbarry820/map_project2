@@ -21,9 +21,9 @@ function list_callback(arr) {
   //ko.applyBindings(new ApiaryList(arr));
 }
 
-document.getElementById('zoom-to-apiary').addEventListener('click', function() {
+/*document.getElementById('zoom-to-apiary').addEventListener('click', function() {
           zoomToApiary();
-        });
+        });*/
 document.getElementById('show-apiaries').addEventListener('click', showApiaries);
 document.getElementById('hide-apiaries').addEventListener('click', hideApiaries);
 
