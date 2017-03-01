@@ -11,7 +11,7 @@
       <div class="options-box">
         <h1>Tuscaloosa County Apairies</h1>
         <div>
-          <input data-bind="textInput: apiaryList.fieldName">
+          <input data-bind="value: fieldName">
           <button data-bind="click: zoomToApiary">Search</button>
         </div>
         <div>
@@ -19,7 +19,7 @@
           <input id="hide-apiaries" type="button" value="Hide Apairies">
         </div>
         <div>
-          <ul data-bind="foreach: apiaryList">
+          <ul data-bind="foreach: apiaries">
               <li data-bind="text: fieldName, click: $parent.setApiary"></li>
           </ul>
         </div>

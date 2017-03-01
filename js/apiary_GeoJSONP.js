@@ -6,7 +6,7 @@
 				"geometry":{"type":"Point","coordinates":[33.165388,-87.739671]},
 				"fieldName":"Long North",
 				"owner":"Jim Barry",
-				"picture":"bee.jpg"
+				"picture":"https://www.flickr.com/photos/147854016@N08/32108648993"
 			},
 
 			{
@@ -21,7 +21,8 @@
 				"geometry":{"type":"Point","coordinates":[33.154356,-87.740085]},
 				"fieldName":"Bailey",
 				"owner":"Jim Barry",
-				"picture":"bee.jpg"
+				"picture":"bee.jpg",
+				"albumId":72157679042637670
 			},
 			{
 				"type":"Apiary",

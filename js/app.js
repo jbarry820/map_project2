@@ -1,4 +1,8 @@
-var apiaryList;
+
+function doThis() {
+  console.log(fieldName);
+}
+
 function init() {
 
   // Wait for the map to be ready
@@ -15,10 +19,7 @@ function init() {
 }
 
 function list_callback(arr) {
-  apiaryList = new ApiaryList(arr);
-  //ko.applyBindings(apiaryList(arr));
-  ko.applyBindings(apiaryList);
-  //ko.applyBindings(new ApiaryList(arr));
+  ko.applyBindings(new ApiaryList(arr));
 }
 
 /*document.getElementById('zoom-to-apiary').addEventListener('click', function() {
@@ -26,6 +27,12 @@ function list_callback(arr) {
         });*/
 document.getElementById('show-apiaries').addEventListener('click', showApiaries);
 document.getElementById('hide-apiaries').addEventListener('click', hideApiaries);
+
+function getPhotoFromAlbum(album_id)
+{
+  var url = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=ffb34fbf0589ca4fe2666fb8dec51586&user_id=147854016@N08&format=json&photoset_id=" + album_id;
+
+}
 
 // Kick off the init function
 init();
