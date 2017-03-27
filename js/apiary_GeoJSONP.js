@@ -6,10 +6,12 @@
 				"geometry":{"type":"Point","coordinates":[33.165388,-87.739671]},
 				"fieldName":"Long North",
 				"owner":"Jim Barry",
-				"picture":"https://www.flickr.com/photos/147854016@N08/32108648993"
+				"picture":"http://farm3.static.flickr.com/2893/32629803580_8387880376_m.jpg",
+				"photosetId":"72157679042637670"
+				//"picture":"'getFilckrPhoto()'"
 			},
 
-			{
+			{//
 				"type":"Apiary",
 				"geometry":{"type":"Point","coordinates":[33.162907,-87.7428645]},
 				"fieldName":"Long South",

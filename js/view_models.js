@@ -6,6 +6,7 @@ var Apairy = function(data) {
 	this.fieldName = ko.observable(data.fieldName);
 	this.owner     = ko.observable(data.owner);
 	this.picture   = ko.observable(data.picture);
+  this.photosetId = ko.observable(data.photosetId);
 
 	this.marker = new google.maps.Marker({
 	  position: new google.maps.LatLng(data.geometry.coordinates[0],data.geometry.coordinates[1]),
@@ -28,11 +29,6 @@ var ApiaryList = function(arr) {
 	//console.log(this.apiaries.length);
 
 	this.setApiary = function(clickedApiary) {
-		console.log("type      = " + clickedApiary.type());
-    console.log("latitude  = " + clickedApiary.latitude());
-    console.log("longitude = " + clickedApiary.longitude());
-    console.log("fieldName = " + clickedApiary.fieldName());
-    console.log("owner     = " + clickedApiary.owner());
 
     var apHome = new google.maps.LatLng(clickedApiary.latitude(),clickedApiary.longitude());
 
@@ -58,10 +54,17 @@ var ApiaryList = function(arr) {
       // Check to make sure the infowindow is not already opened on this marker.
       if (infowindow.marker != marker) {
         infowindow.marker = marker;
+        var id = Math.floor(Math.random()*100000);//what is purpose of this line
         var apiaryHtml = ('<div>' + "This is the "  + '"' + clickedApiary.fieldName() + '"' + " Apairy" + '</div>');
-        apiaryHtml += '<img src="' + clickedApiary.picture() + '" />';
+
+        apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
         infowindow.setContent(apiaryHtml);
         infowindow.open(map, marker);
+
+        getFlickrPhotoUrl(clickedApiary.photosetId(), function(url) {
+          $('#apiary_' + id + '_image').append($('<img/>').attr('src', url));
+        });
+
         // Make sure the marker property is cleared if the infowindow is closed.
         infowindow.addListener('closeclick',function(){
           infowindow.setMarker(null);
@@ -73,7 +76,6 @@ var ApiaryList = function(arr) {
 
   //------------------
   this.zoomToApiary = function() {
-    console.log(self.fieldName);
 
     if (self.fieldName == '') {
       window.alert('You must enter a valid apiary name.');
@@ -94,7 +96,7 @@ var ApiaryList = function(arr) {
       }
     }
   };
-};
+};/*
 
 function showApiaries() {
     var bounds = new google.maps.LatLngBounds();
@@ -113,34 +115,4 @@ function hideApiaries() {
   	for (var i = 0; i < markers().length; i++) {
     	markers()[i].setMap(null);
   }
-}
-
-// This function takes the input value in the find nearby area text input
-      // locates it, and then zooms into that area. This is so that the user can
-      // show all listings, then decide to focus on one area of the map.
-      /*function zoomToApiary() {
-        // Initialize the geocoder.
-        var geocoder = new google.maps.Geocoder();
-        // Get the address or place that the user entered.
-        var fldName = document.getElementById('zoom-to-apiary-text').value;
-        console.log(fldName);
-        //console.log(apiaries([0].this.type()));
-        // Make sure the address isn't blank.
-        if (fldName == '') {
-          window.alert('You must enter a valid apiary name.');
-        } else {
-          // Geocode the address/area entered to get the center. Then, center the map
-          // on it and zoom in
-          geocoder.geocode(
-            { address: address,
-              //componentRestrictions: {locality: 'Alabama '}
-            }, function(results, status) {
-              if (status == google.maps.GeocoderStatus.OK) {
-                map.setCenter(results[0].geometry.location);
-                map.setZoom(15);
-              } else {
-                window.alert('That is not a valid apiary name.');
-              }
-            });
-        }
-      }*/
+}*/
