@@ -50,7 +50,7 @@ function getFlickrImageUrl(p)
 }
 
 /*
- * Open the drawer when the menu ison is clicked.
+ * Open the drawer when the menu icon is clicked.
  */
 $('#menu').click(function(e) {
   e.stopPropagation();
