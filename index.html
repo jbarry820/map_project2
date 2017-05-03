@@ -7,28 +7,35 @@
     <link rel="stylesheet" href="css/style.css">
   </head>
   <body>
-    <div class="container">
-      <div class="options-box">
-        <h1>Tuscaloosa County Apairies</h1>
-        <div>
-          <input id="show-apiaries" type="button" value="Show Apairies">
-          <input id="hide-apiaries" type="button" value="Hide Apairies">
-        </div>
-        <div>
-          <ul data-bind="foreach: apiaryList">
-              <li data-bind="text: fieldName, click: $parent.setApiary"></li>
-          </ul>
-        </div>
+    <nav id='drawer'>
+      <h1>Tuscaloosa County Apairies</h1>
+      <div>
+        <input data-bind="value: fieldName">
+        <button data-bind="click: zoomToApiary">Search</button>
       </div>
-    </div>
-    <div id="map"></div>
+      <div>
+        <input id="show-apiaries" type="button" value="Show Apairies">
+        <input id="hide-apiaries" type="button" value="Hide Apairies">
+      </div>
+      <div>
+        <ul data-bind="foreach: apiaries">
+          <li data-bind="text: fieldName, click: $parent.setApiary"></li>
+        </ul>
+      </div>
+    </nav>
+    <main class='container'>
+      <a id="menu">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z"/>
+        </svg>
+      </a>
+      <div id="map"></div>
+    </main>
 
-    <script type='text/javascript' src='js/map.js'></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkV7z3H902_Zl_Ryz6JK4W6qJTIderjE8&callback=initMap" async defer></script>
-    <!--<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-    </script>-->
-
+    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/lib/knockout-3.2.0.js" async></script>
+    <script type='text/javascript' src='js/map.js' async></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkV7z3H902_Zl_Ryz6JK4W6qJTIderjE8&callback=initMap" async defer></script>
     <script type="text/javascript" src="js/view_models.js" async></script>
     <script type="text/javascript" src="js/app.js" async></script>
   </body>
