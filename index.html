@@ -31,11 +31,11 @@
       </a>
       <div id="map"></div>
     </main>
-
+    <script type="text/javascript" src="js/error_handling.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkV7z3H902_Zl_Ryz6JK4W6qJTIderjE8&callback=initMap" onerror="gError()"></script>
     <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
     <script type="text/javascript" src="js/lib/knockout-3.2.0.js" async></script>
     <script type='text/javascript' src='js/map.js' async></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkV7z3H902_Zl_Ryz6JK4W6qJTIderjE8&callback=initMap" async defer></script>
     <script type="text/javascript" src="js/view_models.js" async></script>
     <script type="text/javascript" src="js/app.js" async></script>
   </body>

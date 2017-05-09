@@ -36,10 +36,12 @@ function getFlickrPhotoUrl(photoset_id, title, callback) {
           callback(url);
         }
         else{
+      alert('Flickr could not be loaded.');
         }
       });
     },
     error: function(xhr, stats, err) {
+      alert('Flickr could not be loaded.');
     }
   });
 }
