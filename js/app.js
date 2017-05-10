@@ -20,8 +20,15 @@ function list_callback(arr) {
 document.getElementById('show-apiaries').addEventListener('click', showApiaries);
 document.getElementById('hide-apiaries').addEventListener('click', hideApiaries);
 
+$flickrElem = $(alert("Oh no"))
+var flickrRequestTimeout = setTimeout(function () {
+  $flickrElem.text("failed to get flickr resources");
+}, 8000);
+
 function getFlickrPhotoUrl(photoset_id, title, callback) {
+  var $flickrElem = $();
   var url = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=ffb34fbf0589ca4fe2666fb8dec51586&user_id=147854016@N08&photoset_id=" + photoset_id + "&format=json&nojsoncallback=1";
+  //-------------------
   $.ajax({
     url: url,
     type: 'get',
@@ -29,19 +36,13 @@ function getFlickrPhotoUrl(photoset_id, title, callback) {
       console.log(resp);
       //-------------------------------
       var photos = resp.photoset.photo;
-
       photos.forEach(function(p) {
         if (p.title === title) {
           var url = getFlickrImageUrl(p);
           callback(url);
         }
-        else{
-      alert('Flickr could not be loaded.');
-        }
       });
-    },
-    error: function(xhr, stats, err) {
-      alert('Flickr could not be loaded.');
+      clearTimeout(flickrRequestTimeout);
     }
   });
 }
