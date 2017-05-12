@@ -20,10 +20,10 @@ function list_callback(arr) {
 document.getElementById('show-apiaries').addEventListener('click', showApiaries);
 document.getElementById('hide-apiaries').addEventListener('click', hideApiaries);
 
-$flickrElem = $(alert("Oh no"))
-var flickrRequestTimeout = setTimeout(function () {
+//$flickrElem = $(alert("Oh no"))
+/*var flickrRequestTimeout = setTimeout(function () {
   $flickrElem.text("failed to get flickr resources");
-}, 8000);
+}, 8000);*/
 
 function getFlickrPhotoUrl(photoset_id, title, callback) {
   var $flickrElem = $();
@@ -34,15 +34,19 @@ function getFlickrPhotoUrl(photoset_id, title, callback) {
     type: 'get',
     success: function(resp) {
       console.log(resp);
-      //-------------------------------
-      var photos = resp.photoset.photo;
-      photos.forEach(function(p) {
-        if (p.title === title) {
-          var url = getFlickrImageUrl(p);
-          callback(url);
-        }
-      });
-      clearTimeout(flickrRequestTimeout);
+      if (resp.stat != "fail") {
+        console.log("not fail")
+        var photos = resp.photoset.photo;
+        photos.forEach(function(p) {
+          if (p.title === title) {
+            var url = getFlickrImageUrl(p);
+            callback(url);
+          }
+        });
+      } else {
+        alert(resp.message);
+      }
+      //clearTimeout(flickrRequestTimeout);
     }
   });
 }

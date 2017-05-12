@@ -45,6 +45,7 @@ var ApiaryList = function(arr) {
       position: apHomeLatLong,
       map: map,
       title: 'Finally'
+      //title: this.fieldName
     });
     var apiaryInfowindow = new google.maps.InfoWindow();
     apMarker.addListener('click', function() {
@@ -55,14 +56,16 @@ var ApiaryList = function(arr) {
       // Check to make sure the infowindow is not already opened on this marker.
       if (infowindow.marker != marker) {
         infowindow.marker = marker;
-        var id = Math.floor(Math.random()*100000);//what is purpose of this line
+        var id = Math.floor(Math.random()*100000);
         var apiaryHtml = ('<div>' + "This is the "  + '"' + clickedApiary.fieldName() + '"' + " Apiary" + '</div>');
 
         apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
+        console.log(apiaryHtml);
         infowindow.setContent(apiaryHtml);
         infowindow.open(map, marker);
 
         getFlickrPhotoUrl(clickedApiary.photosetId(), clickedApiary.fieldName(), function(url) {
+        //$('#apiary_' + id + '_image').append($('<img/>').attr('src', url, 'width', '80'));
         $('#apiary_' + id + '_image').append($('<img/>').attr('src', url));
         });
 
