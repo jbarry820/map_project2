@@ -10,9 +10,13 @@
     <nav id='drawer'>
       <h1>Tuscaloosa County Apairies</h1>
       <div>
-        <input data-bind="value: fieldName">
+        <input data-bind="value: fieldName" placeholder="Search for Apiary"/>
         <button data-bind="click: zoomToApiary">Search</button>
       </div>
+      <!-- <div>
+        <h3>5- Filter display by name</h3>
+        <p>Filter: <input data-bind="value: filter, valueUpdate: 'afterkeydown'" /></p>
+      </div> -->
       <div>
         <input id="show-apiaries" type="button" value="Show Apairies">
         <input id="hide-apiaries" type="button" value="Hide Apairies">

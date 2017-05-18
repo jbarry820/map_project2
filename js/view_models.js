@@ -21,7 +21,8 @@ var ApiaryList = function(arr) {
   var self = this;
 
   this.apiaries = ko.observableArray([]);
-  this.fieldName = "My Search";
+  //this.fieldName = "My Search";
+  this.fieldName = "";
 
   arr.forEach(function(apiaryItem){
     self.apiaries.push( new Apiary(apiaryItem) );
@@ -65,8 +66,7 @@ var ApiaryList = function(arr) {
         infowindow.open(map, marker);
 
         getFlickrPhotoUrl(clickedApiary.photosetId(), clickedApiary.fieldName(), function(url) {
-        //$('#apiary_' + id + '_image').append($('<img/>').attr('src', url, 'width', '80'));
-        $('#apiary_' + id + '_image').append($('<img/>').attr('src', url));
+        $('#apiary_' + id + '_image').append($('<img/>').attr({'src': url, 'width': '80'}));
         });
 
         // Make sure the marker property is cleared if the infowindow is closed.
