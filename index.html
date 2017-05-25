@@ -10,16 +10,16 @@
     <nav id='drawer'>
       <h1>Tuscaloosa County Apairies</h1>
         <div>
-          <input data-bind="value: fieldName">
-          <button data-bind="click: zoomToApiary">Search</button>
+          <input data-bind="value: apiaryList.filter, valueUpdate: 'afterkeydown', event: { keyup: apiaryList.filter_apiaries }">
+          <button data-bind="click: apiaryList.filter_apiaries">Search</button>
         </div>
       <div>
         <input id="show-apiaries" type="button" value="Show Apairies">
         <input id="hide-apiaries" type="button" value="Hide Apairies">
       </div>
       <div>
-        <ul data-bind="foreach: apiaries">
-          <li data-bind="text: fieldName, click: $parent.setApiary"></li>
+        <ul data-bind="foreach: apiaryList.filtered_apiaries">
+          <li data-bind="text: fieldName, click: apiaryList.setApiary"></li>
         </ul>
       </div>
     </nav>

@@ -20,13 +20,33 @@ var Apiary = function(data) {
 var ApiaryList = function(arr) {
   var self = this;
 
-  this.apiaries = ko.observableArray([]);
-  //this.fieldName = "My Search";
+  this.filter = ko.observable("");
+  this.filtered_apiaries = ko.observableArray([]);
+  this.apiaries = ko.observableArray([])
   this.fieldName = "";
+  this.filter_apiaries = function() {
+    //clear filtered apiaries
+    self.filtered_apiaries.removeAll();
+    if (self.filter() == "" )
+    {
+      //add all apiaries to filtered apiaries
+      for (var i = 0; i < self.apiaries().length; i++)
+        self.filtered_apiaries.push(self.apiaries()[i]);
+    } else {
+      //add only apiaries that match filter
+      for (var i = 0; i < self.apiaries().length; i++) {
+        var fn = self.apiaries()[i].fieldName().toLowerCase();
+        if (fn.indexOf(self.filter().toLowerCase()) > -1)
+          self.filtered_apiaries.push(self.apiaries()[i]);
+      }
+    }
+    return true;
+  }
 
   arr.forEach(function(apiaryItem){
     self.apiaries.push( new Apiary(apiaryItem) );
   });
+  this.filter_apiaries();
   this.currentApiary = ko.observable(this.apiaries()[0]);
 
   this.setApiary = function(clickedApiary) {

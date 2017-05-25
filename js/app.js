@@ -13,8 +13,12 @@ function init() {
   document.getElementsByTagName('head')[0].appendChild(script);
 }
 
+var apiaryList;
 function list_callback(arr) {
-  ko.applyBindings(new ApiaryList(arr));
+  apiaryList = new ApiaryList(arr);
+  ko.applyBindings();
+
+  //ko.applyBindings(new ApiaryList(arr));
 }
 
 document.getElementById('show-apiaries').addEventListener('click', showApiaries);
