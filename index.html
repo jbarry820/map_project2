@@ -10,8 +10,7 @@
     <nav id='drawer'>
       <h1>Tuscaloosa County Apairies</h1>
         <div>
-          <input data-bind="value: apiaryList.filter, valueUpdate: 'afterkeydown', event: { keyup: apiaryList.filter_apiaries }">
-          <button data-bind="click: apiaryList.filter_apiaries">Search</button>
+          <input data-bind="value: apiaryList.filter, valueUpdate: 'afterkeydown', event: { keyup: apiaryList.filter_apiaries }" placeholder="Filter locations">
         </div>
       <div>
         <input id="show-apiaries" type="button" value="Show Apairies">
@@ -31,12 +30,12 @@
       </a>
       <div id="map"></div>
     </main>
-    <script type="text/javascript" src="js/error_handling.js"></script>
+    <script src="js/error_handling.js"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDkV7z3H902_Zl_Ryz6JK4W6qJTIderjE8&callback=initMap" onerror="gError()"></script>
-    <script type="text/javascript" src="js/jquery-2.1.4.min.js"></script>
-    <script type="text/javascript" src="js/lib/knockout-3.2.0.js" async></script>
-    <script type='text/javascript' src='js/map.js' async></script>
-    <script type="text/javascript" src="js/view_models.js" async></script>
-    <script type="text/javascript" src="js/app.js" async></script>
+    <script src="js/jquery-2.1.4.min.js"></script>
+    <script src="js/lib/knockout-3.4.2.js" async></script>
+    <script src='js/map.js' async></script>
+    <script src="js/view_models.js" async></script>
+    <script src="js/app.js" async></script>
   </body>
 </html>

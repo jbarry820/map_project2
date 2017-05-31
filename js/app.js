@@ -1,3 +1,4 @@
+"use strict";
 function init() {
 
   // Wait for the map to be ready
@@ -60,9 +61,6 @@ function getFlickrImageUrl(p)
   return "https://farm" + p.farm + ".staticflickr.com/" + p.server + "/" + p.id + "_" + p.secret + ".jpg";
 }
 
-/*
- * Open the drawer when the menu icon is clicked.
- */
 $('#menu').click(function(e) {
   e.stopPropagation();
   $('#drawer').toggleClass('open');
@@ -70,9 +68,6 @@ $('#menu').click(function(e) {
 $('#map').click(function() {
   $('#drawer').removeClass('open');
 });
-
-// Kick off the init function
-init();
 
 $(document).ready(function() {
   $('#map').css('height', $(window).height() + 'px');

@@ -1,6 +1,5 @@
-
+"use strict";
 var Apiary = function(data) {
-  this.type      = ko.observable(data.type);
   this.latitude  = ko.observable(data.geometry.coordinates[0]);
   this.longitude = ko.observable(data.geometry.coordinates[1]);
   this.fieldName = ko.observable(data.fieldName);
@@ -82,16 +81,24 @@ var ApiaryList = function(arr) {
 
         apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
         console.log(apiaryHtml);
-        infowindow.setContent(apiaryHtml);
+        //infowindow.setContent(apiaryHtml);
         infowindow.open(map, marker);
 
-        getFlickrPhotoUrl(clickedApiary.photosetId(), clickedApiary.fieldName(), function(url) {
+        //----------------------
+        /*getFlickrPhotoUrl(clickedApiary.photosetId(), clickedApiary.fieldName(), function(url) {
         $('#apiary_' + id + '_image').append($('<img/>').attr({'src': url, 'width': '80'}));
+        });*/
+        //----------------------
+
+        getFlickrPhotoUrl(clickedApiary.photosetId(), clickedApiary.fieldName(), function(url) {
+        var finalContent = apiaryHtml + '<img src = "' + url + '"width = 80>';
+        infowindow.setContent(finalContent);
         });
 
         // Make sure the marker property is cleared if the infowindow is closed.
         infowindow.addListener('closeclick',function(){
-          infowindow.setMarker(null);
+          //infowindow.setMarker(null);
+          infowindow.setContent(null);
         });
       }
     }

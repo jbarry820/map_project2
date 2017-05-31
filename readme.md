@@ -11,9 +11,7 @@ Neighborhood Map Project
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
-* You will need Sublime Text Editor or an editor of your choice.
-* You will need either a localhost web server or a regular web server to host the program
+There are no preququisites other than having a web browser.
 
 ### Installing
 

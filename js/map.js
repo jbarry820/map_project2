@@ -1,4 +1,4 @@
-
+"use strict";
 var map;
 var markers;
 function initMap() {
@@ -9,6 +9,7 @@ function initMap() {
 	});
 
 	markers = ko.observableArray([]);
+  init();
 }
 
 function showApiaries() {
