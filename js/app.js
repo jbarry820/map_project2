@@ -18,17 +18,7 @@ var apiaryList;
 function list_callback(arr) {
   apiaryList = new ApiaryList(arr);
   ko.applyBindings();
-
-  //ko.applyBindings(new ApiaryList(arr));
 }
-
-document.getElementById('show-apiaries').addEventListener('click', showApiaries);
-document.getElementById('hide-apiaries').addEventListener('click', hideApiaries);
-
-//$flickrElem = $(alert("Oh no"))
-/*var flickrRequestTimeout = setTimeout(function () {
-  $flickrElem.text("failed to get flickr resources");
-}, 8000);*/
 
 function getFlickrPhotoUrl(photoset_id, title, callback) {
   var $flickrElem = $();
@@ -51,7 +41,6 @@ function getFlickrPhotoUrl(photoset_id, title, callback) {
       } else {
         alert(resp.message);
       }
-      //clearTimeout(flickrRequestTimeout);
     }
   });
 }

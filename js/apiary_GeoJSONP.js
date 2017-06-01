@@ -49,15 +49,6 @@
 			},
 			{
 				"type":"Apiary",
-				"geometry":{"type":"Point","coordinates":[33.198101,-87.772925]},
-				"fieldName":"Jimmy Gilliam",
-				"owner":"Jim Barry",
-				"picture":"bee.jpg",
-				"photosetId":"72157679042637670",
-				"pictureId":"32108648463"
-			},
-			{
-				"type":"Apiary",
 				"geometry":{"type":"Point","coordinates":[33.157510,-87.291977]},
 				"fieldName":"Chris",
 				"owner":"Jim Barry",
