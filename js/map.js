@@ -8,8 +8,21 @@ function initMap() {
 	  zoom: 11
 	});
 
+  // Wait for the map to be ready
+  if (!map)
+  {
+    setTimeout(function() { init(); }, 100);
+    return;
+  }
+
 	markers = ko.observableArray([]);
-  init();
+  //init();
+
+  // Go get the apiary data
+  var script = document.createElement('script');
+  script.src = 'js/apiary_GeoJSONP.js';
+  document.getElementsByTagName('head')[0].appendChild(script);
+
 }
 
 function showApiaries() {

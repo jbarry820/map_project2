@@ -1,18 +1,4 @@
 "use strict";
-function init() {
-
-  // Wait for the map to be ready
-  if (!map)
-  {
-    setTimeout(function() { init(); }, 100);
-    return;
-  }
-
-  // Go get the apiary data
-  var script = document.createElement('script');
-  script.src = 'js/apiary_GeoJSONP.js';
-  document.getElementsByTagName('head')[0].appendChild(script);
-}
 
 var apiaryList;
 function list_callback(arr) {
@@ -45,8 +31,7 @@ function getFlickrPhotoUrl(photoset_id, title, callback) {
   });
 }
 
-function getFlickrImageUrl(p)
-{
+function getFlickrImageUrl(p) {
   return "https://farm" + p.farm + ".staticflickr.com/" + p.server + "/" + p.id + "_" + p.secret + ".jpg";
 }
 
