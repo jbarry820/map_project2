@@ -1,11 +1,5 @@
 "use strict";
 
-var apiaryList;
-function list_callback(arr) {
-  apiaryList = new ApiaryList(arr);
-  ko.applyBindings();
-}
-
 function getFlickrPhotoUrl(photoset_id, title, callback) {
   var $flickrElem = $();
   var url = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=ffb34fbf0589ca4fe2666fb8dec51586&user_id=147854016@N08&photoset_id=" + photoset_id + "&format=json&nojsoncallback=1";
@@ -27,7 +21,16 @@ function getFlickrPhotoUrl(photoset_id, title, callback) {
       } else {
         alert(resp.message);
       }
+    },
+    //
+    error: function(xhr, status, error) {
+      console.log("Error flickr");
+      var err = ("(" + xhr.responseText + ")");
+      console.log(err);
+      console.log(status);
+      console.log(error);
     }
+    //
   });
 }
 

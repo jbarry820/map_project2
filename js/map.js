@@ -1,6 +1,7 @@
 "use strict";
 var map;
 var markers;
+var apiaryList;
 function initMap() {
 	var home = new google.maps.LatLng(33.050945,-87.715825);
 	map = new google.maps.Map(document.getElementById('map'), {
@@ -19,9 +20,12 @@ function initMap() {
   //init();
 
   // Go get the apiary data
-  var script = document.createElement('script');
+  /*var script = document.createElement('script');
   script.src = 'js/apiary_GeoJSONP.js';
-  document.getElementsByTagName('head')[0].appendChild(script);
+  document.getElementsByTagName('head')[0].appendChild(script);*/
+
+  apiaryList = new ApiaryList(apiaryArray);
+  ko.applyBindings(apiaryList);
 
 }
 
