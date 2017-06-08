@@ -93,6 +93,7 @@ var apiaryArray = [
       ];
 
 var Apiary = function(data) {
+  var self = this;
   this.latitude  = ko.observable(data.geometry.coordinates[0]);
   this.longitude = ko.observable(data.geometry.coordinates[1]);
   this.fieldName = ko.observable(data.fieldName);
@@ -103,9 +104,26 @@ var Apiary = function(data) {
 
   this.marker = new google.maps.Marker({
     position: new google.maps.LatLng(data.geometry.coordinates[0],data.geometry.coordinates[1]),
+    animation: google.maps.Animation.DROP,
     map: map
   });
+
+  //apiaryList.populateInfoWindow(this.marker);
+
   markers().push(this.marker);
+  this.marker.addListener('click', toggleBounce);
+
+  function toggleBounce() {
+    if (self.marker.getAnimation() !== null) {
+      self.marker.setAnimation(null);
+    } else {
+      self.marker.setAnimation(google.maps.Animation.BOUNCE);
+      setTimeout(function () {
+        self.marker.setAnimation(null);
+      }, 700);
+      apiaryList.setApiary.populateInfoWindow(this.marker);
+    }
+  }
 }
 
 // Receives array of apiary data
@@ -166,31 +184,20 @@ var ApiaryList = function(arr) {
     });
 
     function populateInfoWindow(marker, infowindow) {
-      // Check to make sure the infowindow is not already opened on this marker.
       if (infowindow.marker != marker) {
         infowindow.marker = marker;
         var id = Math.floor(Math.random()*100000);
         var apiaryHtml = ('<div>' + "This is the "  + '"' + clickedApiary.fieldName() + '"' + " Apiary" + '</div>');
 
         apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
-        console.log(apiaryHtml);
-        //infowindow.setContent(apiaryHtml);
         infowindow.open(map, marker);
-
-        //----------------------
-        /*getFlickrPhotoUrl(clickedApiary.photosetId(), clickedApiary.fieldName(), function(url) {
-        $('#apiary_' + id + '_image').append($('<img/>').attr({'src': url, 'width': '80'}));
-        });*/
-        //----------------------
 
         getFlickrPhotoUrl(clickedApiary.photosetId(), clickedApiary.fieldName(), function(url) {
         var finalContent = apiaryHtml + '<img src = "' + url + '"width = 80>';
         infowindow.setContent(finalContent);
         });
 
-        // Make sure the marker property is cleared if the infowindow is closed.
         infowindow.addListener('closeclick',function(){
-          //infowindow.setMarker(null);
           infowindow.setContent(null);
         });
       }
@@ -220,20 +227,3 @@ var ApiaryList = function(arr) {
     }
   };
 };
-
-function showApiaries() {
-    var bounds = new google.maps.LatLngBounds();
-    // Extend the boundaries of the map for each marker and display the marker
-    for (var i = 0; i < markers().length; i++) {
-      markers()[i].setMap(map);
-      bounds.extend(markers()[i].position);
-    }
-    map.fitBounds(bounds);
- }
-
-// This function will loop through the listings and hide them all.
-function hideApiaries() {
-    for (var i = 0; i < markers().length; i++) {
-      markers()[i].setMap(null);
-  }
-}
