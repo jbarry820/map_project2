@@ -121,7 +121,8 @@ var Apiary = function(data) {
       setTimeout(function () {
         self.marker.setAnimation(null);
       }, 700);
-      apiaryList.setApiary.populateInfoWindow(this.marker);
+      //apiaryList.setApiary.populateInfoWindow(this.marker);
+      populateInfoWindow(this.marker, infowindow, clickedApiary, fieldName);
     }
   }
 }
@@ -180,10 +181,13 @@ var ApiaryList = function(arr) {
     });
     var apiaryInfowindow = new google.maps.InfoWindow();
     apMarker.addListener('click', function() {
-      populateInfoWindow(this, apiaryInfowindow);
+      populateInfoWindow(this, apiaryInfowindow, clickedApiary, self.fieldName);
     });
+    self.currentApiary(clickedApiary);
+  };
+};
 
-    function populateInfoWindow(marker, infowindow) {
+function populateInfoWindow(marker, infowindow, clickedApiary, fieldName) {
       if (infowindow.marker != marker) {
         infowindow.marker = marker;
         var id = Math.floor(Math.random()*100000);
@@ -202,28 +206,3 @@ var ApiaryList = function(arr) {
         });
       }
     }
-    self.currentApiary(clickedApiary);
-  };
-
-  //------------------
-  this.zoomToApiary = function() {
-
-    if (self.fieldName == '') {
-      window.alert('You must enter a valid apiary name.');
-    } else {
-      // Find the apiary
-      var foundIt = false;
-      self.apiaries().forEach(function(a){
-        if (a.fieldName() == self.fieldName)
-        {
-          self.setApiary(a);
-          foundIt = true;
-        }
-      });
-      if (!foundIt)
-      {
-        window.alert("Sorry, no apiaries match your search");
-      }
-    }
-  };
-};
