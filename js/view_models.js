@@ -108,12 +108,8 @@ var Apiary = function(data) {
     map: map
   });
 
-  //apiaryList.populateInfoWindow(this.marker);
+  this.marker.addListener('click', function() {
 
-  markers().push(this.marker);
-  this.marker.addListener('click', toggleBounce);
-
-  function toggleBounce() {
     if (self.marker.getAnimation() !== null) {
       self.marker.setAnimation(null);
     } else {
@@ -121,11 +117,28 @@ var Apiary = function(data) {
       setTimeout(function () {
         self.marker.setAnimation(null);
       }, 700);
-      //apiaryList.setApiary.populateInfoWindow(this.marker);
-      populateInfoWindow(this.marker, infowindow, clickedApiary, fieldName);
+      console.log(self.marker.position);
+      map.setCenter(self.marker.position);
+      map.setZoom(20);
+      map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+
+      populateInfoWindow(self);
     }
-  }
+  });
+  this.infowindow = new google.maps.InfoWindow();
+
+  markers().push(this.marker);
 }
+
+/*var setApiary = function(clickedApiary) {
+
+    var apHome = new google.maps.LatLng(clickedApiary.latitude(),clickedApiary.longitude());
+
+    map.setCenter(apHome);
+    map.setZoom(20);
+    map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+    //self.currentApiary(clickedApiary);
+  };*/
 
 // Receives array of apiary data
 var ApiaryList = function(arr) {
@@ -164,45 +177,29 @@ var ApiaryList = function(arr) {
 
     var apHome = new google.maps.LatLng(clickedApiary.latitude(),clickedApiary.longitude());
 
-    map = new google.maps.Map(document.getElementById('map'), {
-      center: apHome,
-      zoom: 20,
-      mapTypeId: 'satellite'
-    });
-
-    var apHomeLatLong = {lat:clickedApiary.latitude(),lng:clickedApiary.longitude()};
-        console.log(apHomeLatLong);
-
-    var apMarker = new google.maps.Marker({
-      position: apHomeLatLong,
-      map: map,
-      title: 'Finally'
-      //title: this.fieldName
-    });
-    var apiaryInfowindow = new google.maps.InfoWindow();
-    apMarker.addListener('click', function() {
-      populateInfoWindow(this, apiaryInfowindow, clickedApiary, self.fieldName);
-    });
+    map.setCenter(apHome);
+    map.setZoom(20);
+    map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
     self.currentApiary(clickedApiary);
   };
 };
 
-function populateInfoWindow(marker, infowindow, clickedApiary, fieldName) {
-      if (infowindow.marker != marker) {
-        infowindow.marker = marker;
-        var id = Math.floor(Math.random()*100000);
-        var apiaryHtml = ('<div>' + "This is the "  + '"' + clickedApiary.fieldName() + '"' + " Apiary" + '</div>');
+// function populateInfoWindow(marker, infowindow, clickedApiary, fieldName) {
+function populateInfoWindow(a) {
 
-        apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
-        infowindow.open(map, marker);
+  var id = Math.floor(Math.random()*100000);
+  var apiaryHtml = ('<div>' + "This is the "  + '"' + a.fieldName() + '"' + " Apiary" + '</div>');
+  apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
+  a.infowindow.open(map, a.marker);
 
-        getFlickrPhotoUrl(clickedApiary.photosetId(), clickedApiary.fieldName(), function(url) {
-        var finalContent = apiaryHtml + '<img src = "' + url + '"width = 80>';
-        infowindow.setContent(finalContent);
-        });
+  //setApiary();
 
-        infowindow.addListener('closeclick',function(){
-          infowindow.setContent(null);
-        });
-      }
-    }
+  getFlickrPhotoUrl(a.photosetId(), a.fieldName(), function(url) {
+    var finalContent = apiaryHtml + '<img src = "' + url + '"width = 80>';
+    a.infowindow.setContent(finalContent);
+  });
+
+  a.infowindow.addListener('closeclick',function(){
+    a.infowindow.setContent(null);
+  });
+}
