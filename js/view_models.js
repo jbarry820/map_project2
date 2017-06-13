@@ -117,7 +117,6 @@ var Apiary = function(data) {
       setTimeout(function () {
         self.marker.setAnimation(null);
       }, 700);
-      console.log(self.marker.position);
       map.setCenter(self.marker.position);
       map.setZoom(20);
       map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
@@ -129,16 +128,6 @@ var Apiary = function(data) {
 
   markers().push(this.marker);
 }
-
-/*var setApiary = function(clickedApiary) {
-
-    var apHome = new google.maps.LatLng(clickedApiary.latitude(),clickedApiary.longitude());
-
-    map.setCenter(apHome);
-    map.setZoom(20);
-    map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-    //self.currentApiary(clickedApiary);
-  };*/
 
 // Receives array of apiary data
 var ApiaryList = function(arr) {
@@ -184,7 +173,6 @@ var ApiaryList = function(arr) {
   };
 };
 
-// function populateInfoWindow(marker, infowindow, clickedApiary, fieldName) {
 function populateInfoWindow(a) {
 
   var id = Math.floor(Math.random()*100000);

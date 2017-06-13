@@ -8,9 +8,7 @@ function getFlickrPhotoUrl(photoset_id, title, callback) {
     url: url,
     type: 'get',
     success: function(resp) {
-      console.log(resp);
       if (resp.stat != "fail") {
-        console.log("not fail")
         var photos = resp.photoset.photo;
         photos.forEach(function(p) {
           if (p.title === title) {
@@ -24,11 +22,7 @@ function getFlickrPhotoUrl(photoset_id, title, callback) {
     },
     //
     error: function(xhr, status, error) {
-      console.log("Error flickr");
       var err = ("(" + xhr.responseText + ")");
-      console.log(err);
-      console.log(status);
-      console.log(error);
     }
     //
   });
