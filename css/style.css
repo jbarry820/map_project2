@@ -42,9 +42,7 @@ h1 {
     text-align: center;
 }
 #hide-listings,
-#show-listings {
-}
-main {
+#show-listings {} main {
     width: 100%;
     height: 100%;
 }
