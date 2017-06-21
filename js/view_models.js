@@ -184,8 +184,13 @@ var ApiaryList = function(arr) {
             //add only apiaries that match filter
             for (var i = 0; i < self.apiaries().length; i++) {
                 var fn = self.apiaries()[i].fieldName().toLowerCase();
-                if (fn.indexOf(self.filter().toLowerCase()) > -1)
+                if (fn.indexOf(self.filter().toLowerCase()) > -1) {
                     self.filtered_apiaries.push(self.apiaries()[i]);
+                    self.apiaries()[i].marker.setVisible(true);
+                } else {
+                    self.apiaries()[i].marker.setVisible(false);
+                    self.apiaries()[i].marker.infowindow.close();
+                }
             }
         }
         return true;
