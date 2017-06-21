@@ -1,6 +1,7 @@
 "use strict";
 
-var apiaryArray = [{
+var apiaryArray = [
+    {
         "type": "Apiary",
         "geometry": {
             "type": "Point",
@@ -128,6 +129,9 @@ var Apiary = function(data) {
     var self = this;
     this.latitude = ko.observable(data.geometry.coordinates[0]);
     this.longitude = ko.observable(data.geometry.coordinates[1]);
+    this.latLong = ko.computed(function() {
+        return self.latitude() + "," + self.longitude();
+    })
     this.fieldName = ko.observable(data.fieldName);
     this.owner = ko.observable(data.owner);
     this.picture = ko.observable(data.picture);
@@ -150,11 +154,12 @@ var Apiary = function(data) {
                 self.marker.setAnimation(null);
             }, 700);
             map.setCenter(self.marker.position);
-            map.setZoom(20);
-            map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+            //map.setZoom(20);
+            //map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
 
-            populateInfoWindow(self);
+            //populateInfoWindow(self);
         }
+        apiaryList.setApiary(self);
     });
     this.infowindow = new google.maps.InfoWindow();
 
@@ -164,7 +169,6 @@ var Apiary = function(data) {
 // Receives array of apiary data
 var ApiaryList = function(arr) {
     var self = this;
-
     this.filter = ko.observable("");
     this.filtered_apiaries = ko.observableArray([]);
     this.apiaries = ko.observableArray([]);
@@ -194,13 +198,35 @@ var ApiaryList = function(arr) {
     this.currentApiary = ko.observable(this.apiaries()[0]);
 
     this.setApiary = function(clickedApiary) {
-
         var apHome = new google.maps.LatLng(clickedApiary.latitude(), clickedApiary.longitude());
-
         map.setCenter(apHome);
-        map.setZoom(20);
-        map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
+        //map.setZoom(20);
+        //map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
         self.currentApiary(clickedApiary);
+        for (var i=0; i < self.filtered_apiaries().length; i++) {
+            markers()[i].setVisible(false);
+            if (markers()[i].infowindow != undefined) {
+                console.log("not undefined")
+                markers()[i].infowindow.close();
+            }
+            //markers()[i].infowindow.close();
+            }
+            //markers()[i].infowindow.close();
+
+        //clickedApiary.marker.setVisible(true); //works
+        //console.log(markers[0].position);
+        for (var i=0; i < self.filtered_apiaries().length; i++) {
+            //console.log(self.apiaries()[i].fieldName());
+            //console.log(clickedApiary.fieldName());
+            //if (apiaryList.fieldName != clickedApiary.fieldName()) {
+            if (self.apiaries()[i].fieldName() === clickedApiary.fieldName()) {
+                markers()[i].setVisible(true);
+                populateInfoWindow(clickedApiary);
+                //clickedApiary.marker.setVisible(true);
+            } /*else {
+                markers()[i].setVisible(false);
+            }*/
+        }
     };
 };
 
