@@ -1,9 +1,9 @@
-"use strict";
 var map;
 var markers;
 var apiaryList;
 
 function initMap() {
+    "use strict";
     var home = new google.maps.LatLng(33.050945, -87.715825);
     map = new google.maps.Map(document.getElementById("map"), {
         center: home,

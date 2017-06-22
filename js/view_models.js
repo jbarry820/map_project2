@@ -1,5 +1,3 @@
-"use strict";
-
 var apiaryArray = [
     {
         "type": "Apiary",
@@ -126,12 +124,13 @@ var apiaryArray = [
 ];
 
 var Apiary = function(data) {
+    "use strict";
     var self = this;
     this.latitude = ko.observable(data.geometry.coordinates[0]);
     this.longitude = ko.observable(data.geometry.coordinates[1]);
     this.latLong = ko.computed(function() {
         return self.latitude() + "," + self.longitude();
-    })
+    });
     this.fieldName = ko.observable(data.fieldName);
     this.owner = ko.observable(data.owner);
     this.picture = ko.observable(data.picture);
@@ -154,10 +153,6 @@ var Apiary = function(data) {
                 self.marker.setAnimation(null);
             }, 700);
             map.setCenter(self.marker.position);
-            //map.setZoom(20);
-            //map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
-
-            //populateInfoWindow(self);
         }
         apiaryList.setApiary(self);
     });
@@ -168,6 +163,7 @@ var Apiary = function(data) {
 
 // Receives array of apiary data
 var ApiaryList = function(arr) {
+    "use strict";
     var self = this;
     this.filter = ko.observable("");
     this.filtered_apiaries = ko.observableArray([]);
@@ -176,20 +172,21 @@ var ApiaryList = function(arr) {
     this.filter_apiaries = function() {
         //clear filtered apiaries
         self.filtered_apiaries.removeAll();
-        if (self.filter() == "") {
+        if (self.filter() === "") {
             //add all apiaries to filtered apiaries
             for (var i = 0; i < self.apiaries().length; i++)
                 self.filtered_apiaries.push(self.apiaries()[i]);
         } else {
             //add only apiaries that match filter
-            for (var i = 0; i < self.apiaries().length; i++) {
+            for (i = 0; i < self.apiaries().length; i++) {
                 var fn = self.apiaries()[i].fieldName().toLowerCase();
+                self.apiaries()[i].infowindow.close();
                 if (fn.indexOf(self.filter().toLowerCase()) > -1) {
                     self.filtered_apiaries.push(self.apiaries()[i]);
                     self.apiaries()[i].marker.setVisible(true);
+                    self.apiaries()[i].infowindow.open();
                 } else {
                     self.apiaries()[i].marker.setVisible(false);
-                    self.apiaries()[i].marker.infowindow.close();
                 }
             }
         }
@@ -205,44 +202,28 @@ var ApiaryList = function(arr) {
     this.setApiary = function(clickedApiary) {
         var apHome = new google.maps.LatLng(clickedApiary.latitude(), clickedApiary.longitude());
         map.setCenter(apHome);
-        //map.setZoom(20);
-        //map.setMapTypeId(google.maps.MapTypeId.SATELLITE);
         self.currentApiary(clickedApiary);
         for (var i=0; i < self.filtered_apiaries().length; i++) {
-            markers()[i].setVisible(false);
-            if (markers()[i].infowindow != undefined) {
-                console.log("not undefined")
-                markers()[i].infowindow.close();
+            self.apiaries()[i].marker.setVisible(false);
+            if (self.apiaries()[i].infowindow != undefined) {
+                self.apiaries()[i].infowindow.close();
             }
-            //markers()[i].infowindow.close();
-            }
-            //markers()[i].infowindow.close();
-
-        //clickedApiary.marker.setVisible(true); //works
-        //console.log(markers[0].position);
-        for (var i=0; i < self.filtered_apiaries().length; i++) {
-            //console.log(self.apiaries()[i].fieldName());
-            //console.log(clickedApiary.fieldName());
-            //if (apiaryList.fieldName != clickedApiary.fieldName()) {
+        }
+        for (i=0; i < self.filtered_apiaries().length; i++) {
             if (self.apiaries()[i].fieldName() === clickedApiary.fieldName()) {
                 markers()[i].setVisible(true);
                 populateInfoWindow(clickedApiary);
-                //clickedApiary.marker.setVisible(true);
-            } /*else {
-                markers()[i].setVisible(false);
-            }*/
+            }
         }
     };
 };
 
 function populateInfoWindow(a) {
-
+    "use strict";
     var id = Math.floor(Math.random() * 100000);
     var apiaryHtml = ('<div>' + "This is the " + '"' + a.fieldName() + '"' + " Apiary" + '</div>');
     apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
     a.infowindow.open(map, a.marker);
-
-    //setApiary();
 
     getFlickrPhotoUrl(a.photosetId(), a.fieldName(), function(url) {
         var finalContent = apiaryHtml + '<img src = "' + url + '"width = 80>';
