@@ -1,4 +1,4 @@
-var apiaryArray = [
+/*var apiaryArray = [
     {
         "type": "Apiary",
         "geometry": {
@@ -121,7 +121,7 @@ var apiaryArray = [
         "photosetId": "72157679042637670",
         "pictureId": "32874177151"
     }
-];
+];*/
 
 var Apiary = function(data) {
     "use strict";
@@ -145,21 +145,42 @@ var Apiary = function(data) {
 
     this.marker.addListener('click', function() {
 
-        if (self.marker.getAnimation() !== null) {
+        /*if (self.marker.getAnimation() !== null) {
             self.marker.setAnimation(null);
         } else {
             self.marker.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(function() {
                 self.marker.setAnimation(null);
             }, 700);
-            map.setCenter(self.marker.position);
-        }
+            //map.setCenter(self.marker.position);
+            window.setTimeout(function() {
+                map.panTo(self.marker.position);
+            }, 3000);
+        }*/
+        bouncy();
         apiaryList.setApiary(self);
     });
     this.infowindow = new google.maps.InfoWindow();
 
     markers().push(this.marker);
 };
+
+var bouncy = function() {
+    for (var i = 0; i < apiaryList.apiaries().length; i++) {
+        if (apiaryList()[i].marker.getAnimation() !== null) {
+            self.marker.setAnimation(null);
+        } else {
+            self.marker.setAnimation(google.maps.Animation.BOUNCE);
+            setTimeout(function() {
+                self.marker.setAnimation(null);
+            }, 700);
+            //map.setCenter(self.marker.position);
+            window.setTimeout(function() {
+                map.panTo(self.marker.position);
+            }, 3000);
+        }
+        }
+}
 
 // Receives array of apiary data
 var ApiaryList = function(arr) {
@@ -168,7 +189,7 @@ var ApiaryList = function(arr) {
     this.filter = ko.observable("");
     this.filtered_apiaries = ko.observableArray([]);
     this.apiaries = ko.observableArray([]);
-    this.fieldName = "";
+    //this.fieldName = "";
     this.filter_apiaries = function() {
         //clear filtered apiaries
         self.filtered_apiaries.removeAll();
@@ -219,7 +240,7 @@ var ApiaryList = function(arr) {
 };
 
 function populateInfoWindow(a) {
-    "use strict";
+    //"use strict";
     var id = Math.floor(Math.random() * 100000);
     var apiaryHtml = ('<div>' + "This is the " + '"' + a.fieldName() + '"' + " Apiary" + '</div>');
     apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
