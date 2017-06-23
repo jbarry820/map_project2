@@ -167,16 +167,16 @@ var Apiary = function(data) {
 
 var bouncy = function() {
     for (var i = 0; i < apiaryList.apiaries().length; i++) {
-        if (apiaryList()[i].marker.getAnimation() !== null) {
-            self.marker.setAnimation(null);
+        if (apiaryList.apiaries()[i].marker.getAnimation() !== null) {
+            apiaryList.apiaries()[i].marker.setAnimation(null);
         } else {
-            self.marker.setAnimation(google.maps.Animation.BOUNCE);
+            apiaryList.apiaries()[i].marker.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(function() {
-                self.marker.setAnimation(null);
+                apiaryList.apiaries()[i].marker.setAnimation(null);
             }, 700);
             //map.setCenter(self.marker.position);
             window.setTimeout(function() {
-                map.panTo(self.marker.position);
+                map.panTo(apiaryList.apiaries()[i].marker.position);
             }, 3000);
         }
         }
