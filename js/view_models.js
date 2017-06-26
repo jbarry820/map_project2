@@ -1,128 +1,3 @@
-/*var apiaryArray = [
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.165388, -87.739671]
-        },
-        "fieldName": "Long North",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "732389792544"
-    },
-
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.162907, -87.7428645]
-        },
-        "fieldName": "Long South",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "33192279116"
-    },
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.154356, -87.740085]
-        },
-        "fieldName": "Bailey",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "32768300252"
-    },
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.162621, -87.735356]
-        },
-        "fieldName": "Acorn Tree",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "32921608095"
-    },
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.170098, -87.737866]
-        },
-        "fieldName": "Money Field",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "32767381152"
-    },
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.157510, -87.291977]
-        },
-        "fieldName": "Chris",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "32162511703"
-    },
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.103980, -87.469994]
-        },
-        "fieldName": "Jamey Shows",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "32822533512"
-    },
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.072128, -87.665066]
-        },
-        "fieldName": "Bunn",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "32869719971"
-    },
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.051425, -87.715746]
-        },
-        "fieldName": "Home Side Field",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "32155278284"
-    },
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.051000, -87.715650]
-        },
-        "fieldName": "Home Front",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "32155123374"
-    },
-    {
-        "type": "Apiary",
-        "geometry": {
-            "type": "Point",
-            "coordinates": [33.050978, -87.716837]
-        },
-        "fieldName": "Home Garden",
-        "owner": "Jim Barry",
-        "photosetId": "72157679042637670",
-        "pictureId": "32874177151"
-    }
-];*/
-
 var Apiary = function(data) {
     "use strict";
     var self = this;
@@ -144,20 +19,6 @@ var Apiary = function(data) {
     });
 
     this.marker.addListener('click', function() {
-
-        /*if (self.marker.getAnimation() !== null) {
-            self.marker.setAnimation(null);
-        } else {
-            self.marker.setAnimation(google.maps.Animation.BOUNCE);
-            setTimeout(function() {
-                self.marker.setAnimation(null);
-            }, 700);
-            //map.setCenter(self.marker.position);
-            window.setTimeout(function() {
-                map.panTo(self.marker.position);
-            }, 3000);
-        }*/
-        bouncy();
         apiaryList.setApiary(self);
     });
     this.infowindow = new google.maps.InfoWindow();
@@ -165,19 +26,19 @@ var Apiary = function(data) {
     markers().push(this.marker);
 };
 
-var bouncy = function() {
+var bouncy = function(marker) {
     for (var i = 0; i < apiaryList.apiaries().length; i++) {
-        if (apiaryList.apiaries()[i].marker.getAnimation() !== null) {
-            apiaryList.apiaries()[i].marker.setAnimation(null);
+        if (marker.getAnimation() !== null) {
+            marker.setAnimation(null);
         } else {
-            apiaryList.apiaries()[i].marker.setAnimation(google.maps.Animation.BOUNCE);
+            marker.setAnimation(google.maps.Animation.BOUNCE);
             setTimeout(function() {
-                apiaryList.apiaries()[i].marker.setAnimation(null);
+                marker.setAnimation(null);
             }, 700);
             //map.setCenter(self.marker.position);
-            window.setTimeout(function() {
-                map.panTo(apiaryList.apiaries()[i].marker.position);
-            }, 3000);
+            /*window.setTimeout(function() {
+                map.panTo(marker.position);
+            }, 3000);*/
         }
         }
 }
@@ -222,7 +83,7 @@ var ApiaryList = function(arr) {
 
     this.setApiary = function(clickedApiary) {
         var apHome = new google.maps.LatLng(clickedApiary.latitude(), clickedApiary.longitude());
-        map.setCenter(apHome);
+        map.panTo(apHome);
         self.currentApiary(clickedApiary);
         for (var i=0; i < self.filtered_apiaries().length; i++) {
             self.apiaries()[i].marker.setVisible(false);
@@ -233,6 +94,10 @@ var ApiaryList = function(arr) {
         for (i=0; i < self.filtered_apiaries().length; i++) {
             if (self.apiaries()[i].fieldName() === clickedApiary.fieldName()) {
                 markers()[i].setVisible(true);
+                /*window.setTimeout(function() {
+                    map.panTo(apHome);
+            }, 3000);*/
+                bouncy(self.apiaries()[i].marker);
                 populateInfoWindow(clickedApiary);
             }
         }
