@@ -85,22 +85,20 @@ var ApiaryList = function(arr) {
         var apHome = new google.maps.LatLng(clickedApiary.latitude(), clickedApiary.longitude());
         map.panTo(apHome);
         self.currentApiary(clickedApiary);
+        self.apiaries()[i].infowindow.close();
         for (var i=0; i < self.filtered_apiaries().length; i++) {
             self.apiaries()[i].marker.setVisible(false);
-            if (self.apiaries()[i].infowindow != undefined) {
+            /*if (self.apiaries()[i].infowindow != undefined) {
                 self.apiaries()[i].infowindow.close();
-            }
+            }*/
         }
         for (i=0; i < self.filtered_apiaries().length; i++) {
             if (self.apiaries()[i].fieldName() === clickedApiary.fieldName()) {
                 markers()[i].setVisible(true);
-                /*window.setTimeout(function() {
-                    map.panTo(apHome);
-            }, 3000);*/
-                bouncy(self.apiaries()[i].marker);
-                populateInfoWindow(clickedApiary);
             }
         }
+        bouncy(clickedApiary.marker);
+        populateInfoWindow(clickedApiary);
     };
 };
 
