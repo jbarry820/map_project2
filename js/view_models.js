@@ -47,9 +47,9 @@ var bouncy = function(marker) {
 var ApiaryList = function(arr) {
     "use strict";
     var self = this;
-    this.filter = ko.observable("");
-    this.filtered_apiaries = ko.observableArray([]);
-    this.apiaries = ko.observableArray([]);
+    this.filter = ko.observable("");//a string filter - what we are searching for - if empty filter it shows them all
+    this.filtered_apiaries = ko.observableArray([]);//this is the result of filter_apiaries function
+    this.apiaries = ko.observableArray([]);//apiaries with no filter on them
     //this.fieldName = "";
     this.filter_apiaries = function() {
         //clear filtered apiaries
@@ -85,15 +85,15 @@ var ApiaryList = function(arr) {
         var apHome = new google.maps.LatLng(clickedApiary.latitude(), clickedApiary.longitude());
         map.panTo(apHome);
         self.currentApiary(clickedApiary);
-        self.apiaries()[i].infowindow.close();
+
         for (var i=0; i < self.filtered_apiaries().length; i++) {
             self.apiaries()[i].marker.setVisible(false);
-            /*if (self.apiaries()[i].infowindow != undefined) {
+            if (self.filtered_apiaries()[i].infowindow != undefined) {
                 self.apiaries()[i].infowindow.close();
-            }*/
+            }
         }
         for (i=0; i < self.filtered_apiaries().length; i++) {
-            if (self.apiaries()[i].fieldName() === clickedApiary.fieldName()) {
+            if (self.filtered_apiaries()[i].fieldName() === clickedApiary.fieldName()) {
                 markers()[i].setVisible(true);
             }
         }
@@ -103,10 +103,10 @@ var ApiaryList = function(arr) {
 };
 
 function populateInfoWindow(a) {
-    //"use strict";
-    var id = Math.floor(Math.random() * 100000);
+    "use strict";
+    //var id = Math.floor(Math.random() * 100000);
     var apiaryHtml = ('<div>' + "This is the " + '"' + a.fieldName() + '"' + " Apiary" + '</div>');
-    apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
+    //apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
     a.infowindow.open(map, a.marker);
 
     getFlickrPhotoUrl(a.photosetId(), a.fieldName(), function(url) {
