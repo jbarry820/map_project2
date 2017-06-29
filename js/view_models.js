@@ -62,16 +62,23 @@ var ApiaryList = function(arr) {
             //add only apiaries that match filter
             for (i = 0; i < self.apiaries().length; i++) {
                 var fn = self.apiaries()[i].fieldName().toLowerCase();
-                self.apiaries()[i].infowindow.close();
-                if (fn.indexOf(self.filter().toLowerCase()) > -1) {
+                if (fn.indexOf(self.filter().toLowerCase()) > -1)
                     self.filtered_apiaries.push(self.apiaries()[i]);
-                    self.apiaries()[i].marker.setVisible(true);
-                    self.apiaries()[i].infowindow.open();
-                } else {
-                    self.apiaries()[i].marker.setVisible(false);
-                }
             }
         }
+
+        // Hide all markers and info windows
+        for (i = 0; i < self.apiaries().length; i++) {
+            if (self.apiaries()[i].infowindow != undefined)
+                self.apiaries()[i].infowindow.close();
+            self.apiaries()[i].marker.setVisible(false);
+        }
+
+        // Show the markers that match the filter
+        for (i = 0; i < self.filtered_apiaries().length; i++) {
+            self.filtered_apiaries()[i].marker.setVisible(true);
+        }
+
         return true;
     }
 
@@ -86,15 +93,10 @@ var ApiaryList = function(arr) {
         map.panTo(apHome);
         self.currentApiary(clickedApiary);
 
-        for (var i=0; i < self.filtered_apiaries().length; i++) {
-            self.apiaries()[i].marker.setVisible(false);
-            if (self.filtered_apiaries()[i].infowindow != undefined) {
+        // Close any other open info windows
+        for (var i=0; i < self.apiaries().length; i++) {
+            if (self.apiaries()[i].infowindow != undefined) {
                 self.apiaries()[i].infowindow.close();
-            }
-        }
-        for (i=0; i < self.filtered_apiaries().length; i++) {
-            if (self.filtered_apiaries()[i].fieldName() === clickedApiary.fieldName()) {
-                markers()[i].setVisible(true);
             }
         }
         bouncy(clickedApiary.marker);
