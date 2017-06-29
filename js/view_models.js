@@ -36,16 +36,16 @@ var bouncy = function(marker) {
                 marker.setAnimation(null);
             }, 700);
         }
-        }
+    }
 }
 
 // Receives array of apiary data
 var ApiaryList = function(arr) {
     "use strict";
     var self = this;
-    this.filter = ko.observable("");//a string filter - what we are searching for - if empty filter it shows them all
-    this.filtered_apiaries = ko.observableArray([]);//this is the result of filter_apiaries function
-    this.apiaries = ko.observableArray([]);//apiaries with no filter on them
+    this.filter = ko.observable(""); //a string filter - what we are searching for - if empty filter it shows them all
+    this.filtered_apiaries = ko.observableArray([]); //this is the result of filter_apiaries function
+    this.apiaries = ko.observableArray([]); //apiaries with no filter on them
     //this.fieldName = "";
     this.filter_apiaries = function() {
         //clear filtered apiaries
@@ -90,7 +90,7 @@ var ApiaryList = function(arr) {
         self.currentApiary(clickedApiary);
 
         // Close any other open info windows
-        for (var i=0; i < self.apiaries().length; i++) {
+        for (var i = 0; i < self.apiaries().length; i++) {
             if (self.apiaries()[i].infowindow != undefined) {
                 self.apiaries()[i].infowindow.close();
             }
