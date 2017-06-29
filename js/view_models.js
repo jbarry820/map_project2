@@ -35,10 +35,6 @@ var bouncy = function(marker) {
             setTimeout(function() {
                 marker.setAnimation(null);
             }, 700);
-            //map.setCenter(self.marker.position);
-            /*window.setTimeout(function() {
-                map.panTo(marker.position);
-            }, 3000);*/
         }
         }
 }
@@ -106,9 +102,7 @@ var ApiaryList = function(arr) {
 
 function populateInfoWindow(a) {
     "use strict";
-    //var id = Math.floor(Math.random() * 100000);
     var apiaryHtml = ('<div>' + "This is the " + '"' + a.fieldName() + '"' + " Apiary" + '</div>');
-    //apiaryHtml += '<div id="apiary_' + id + '_image"></div>';
     a.infowindow.open(map, a.marker);
 
     getFlickrPhotoUrl(a.photosetId(), a.fieldName(), function(url) {
