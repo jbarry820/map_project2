@@ -1,6 +1,6 @@
 function getFlickrPhotoUrl(photoset_id, title, callback) {
     "use strict";
-    var url = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=fb34fbf0589ca4fe2666fb8dec51586&user_id=147854016@N08&photoset_id=" + photoset_id + "&format=json&nojsoncallback=1";
+    var url = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=ffb34fbf0589ca4fe2666fb8dec51586&user_id=147854016@N08&photoset_id=" + photoset_id + "&format=json&nojsoncallback=1";
     //-------------------
     $.ajax({
         url: url,
