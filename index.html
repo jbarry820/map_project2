@@ -3,7 +3,7 @@
 
 <head>
     <title>Apiary Map</title>
-    <meta name="viewport" content="initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/style.css">
 </head>
@@ -14,17 +14,17 @@
         <div>
             <input data-bind="value: apiaryList.filter, valueUpdate: 'afterkeydown', event: { keyup: apiaryList.filter_apiaries }" placeholder="Filter locations">
         </div>
+
         <div>
             <ul data-bind="foreach: apiaryList.filtered_apiaries">
                 <li data-bind="text: fieldName, click: apiaryList.setApiary"></li>
             </ul>
         </div>
+
     </nav>
     <main class='container'>
         <a id="menu">
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                <path d="M2 6h20v3H2zm0 5h20v3H2zm0 5h20v3H2z" />
-            </svg>
+            <img class='hb' src="images/hamburger.svg" alt="hamburger icon">
         </a>
         <div id="map"></div>
     </main>
