@@ -1,5 +1,4 @@
-var apiaryArray = [
-    {
+var apiaryArray = [{
         "type": "Apiary",
         "geometry": {
             "type": "Point",

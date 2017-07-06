@@ -11,7 +11,7 @@ function initMap() {
     });
 
     if (!map) {
-        setTimeout (function () {
+        setTimeout(function() {
             init();
         }, 100);
         return;

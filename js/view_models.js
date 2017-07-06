@@ -37,7 +37,7 @@ var bouncy = function(marker) {
             }, 700);
         }
     }
-}
+};
 
 // Receives array of apiary data
 var ApiaryList = function(arr) {
@@ -56,7 +56,7 @@ var ApiaryList = function(arr) {
                 self.filtered_apiaries.push(self.apiaries()[i]);
         } else {
             //add only apiaries that match filter
-            for (i = 0; i < self.apiaries().length; i++) {
+            for (var i = 0; i < self.apiaries().length; i++) {
                 var fn = self.apiaries()[i].fieldName().toLowerCase();
                 if (fn.indexOf(self.filter().toLowerCase()) > -1)
                     self.filtered_apiaries.push(self.apiaries()[i]);
@@ -64,19 +64,19 @@ var ApiaryList = function(arr) {
         }
 
         // Hide all markers and info windows
-        for (i = 0; i < self.apiaries().length; i++) {
+        for (var i = 0; i < self.apiaries().length; i++) {
             if (self.apiaries()[i].infowindow != undefined)
                 self.apiaries()[i].infowindow.close();
             self.apiaries()[i].marker.setVisible(false);
         }
 
         // Show the markers that match the filter
-        for (i = 0; i < self.filtered_apiaries().length; i++) {
+        for (var i = 0; i < self.filtered_apiaries().length; i++) {
             self.filtered_apiaries()[i].marker.setVisible(true);
         }
 
         return true;
-    }
+    };
 
     arr.forEach(function(apiaryItem) {
         self.apiaries.push(new Apiary(apiaryItem));
