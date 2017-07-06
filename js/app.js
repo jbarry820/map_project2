@@ -1,5 +1,9 @@
 function getFlickrPhotoUrl(photoset_id, title, callback) {
     "use strict";
+    var $flickrElem;
+    var flickrRequestTimeout = setTimeout(function() {
+        alert("Failed to get flickr.com resources");
+    }, 8000)
     var url = "https://api.flickr.com/services/rest/?method=flickr.photosets.getPhotos&api_key=ffb34fbf0589ca4fe2666fb8dec51586&user_id=147854016@N08&photoset_id=" + photoset_id + "&format=json&nojsoncallback=1";
     //-------------------
     $.ajax({
@@ -17,9 +21,7 @@ function getFlickrPhotoUrl(photoset_id, title, callback) {
             } else {
                 alert(resp.message);
             }
-        },
-        error: function (xhr, status, error) {
-            var err = ("(" + xhr.responseText + ")");
+            clearTimeout(flickrRequestTimeout);
         }
     });
 }
